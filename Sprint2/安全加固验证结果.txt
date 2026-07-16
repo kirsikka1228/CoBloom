@@ -1,0 +1,37 @@
+CoBloom Sprint 2 安全加固验证结果
+验证日期：2026-07-14
+验证服务：http://localhost:18080（临时验证实例，验证后已停止）
+
+一、允许来源 CORS 预检
+请求 Origin：http://localhost:5173
+结果：HTTP 200
+Access-Control-Allow-Origin：http://localhost:5173
+Access-Control-Allow-Methods：GET,POST,PUT,DELETE,OPTIONS
+
+二、恶意来源 CORS 预检
+请求 Origin：https://evil.example
+结果：HTTP 403
+Access-Control-Allow-Origin：未返回
+
+三、H2 Console 未认证访问
+请求：GET /h2-console
+结果：HTTP 403
+X-Frame-Options：DENY
+
+四、Swagger 未认证访问
+请求：GET /swagger-ui/index.html
+结果：HTTP 403
+X-Frame-Options：DENY
+
+五、自动化测试与构建
+后端：110 tests，0 failures，0 errors，0 skipped，BUILD SUCCESS
+安全配置专项测试：4 tests，全部通过
+JaCoCo Instructions Coverage：85.78%
+JaCoCo Lines Coverage：88.94%
+JaCoCo 85% 门禁：通过
+前端：vite production build 成功
+npm audit：found 0 vulnerabilities
+
+六、密钥处理
+当前源码 application.yml 已不包含真实 LLM API Key 和固定 JWT Secret。
+真实 LLM API Key 曾进入 Git 记录，必须在服务商后台撤销并重新生成；此操作无法通过代码提交代替。

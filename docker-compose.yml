@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      JAVA_OPTS: ""
+      COBLOOM_JWT_SECRET: ${COBLOOM_JWT_SECRET:?Set COBLOOM_JWT_SECRET before starting}
+      COBLOOM_LLM_API_KEY: ${COBLOOM_LLM_API_KEY:?Set COBLOOM_LLM_API_KEY before starting}
+      COBLOOM_CORS_ALLOWED_ORIGINS: ${COBLOOM_CORS_ALLOWED_ORIGINS:-http://localhost}
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:8080"
+    depends_on:
+      - backend

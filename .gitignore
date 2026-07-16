@@ -1,0 +1,19 @@
+node_modules/
+.env
+.env.local
+.DS_Store
+dist/
+build/
+coverage/
+.vscode/
+.idea/
+# H2 database files
+*.db
+*.lock.db
+*.mv.db
+# Maven
+target/
+*.class
+*.jar
+
+backend/data/~$*.docx
